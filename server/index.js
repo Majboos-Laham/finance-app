@@ -15,6 +15,8 @@ import { kpis, products, transactions } from "./data/data.js";
 
 /* CONFIGURATIONS */
 dotenv.config();
+console.log("Environment variables:", process.env); // Debugging
+
 const app = express();
 app.use(express.json());
 app.use(helmet());
@@ -32,7 +34,7 @@ app.use("/transaction", transactionRoutes);
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 9000;
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect(process.env.MONGO_URL || "mongodb://localhost:27017/your-database-name", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
